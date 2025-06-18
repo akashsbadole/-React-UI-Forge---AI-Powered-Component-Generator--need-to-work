@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Copy, Download, Eye, Code, Schema, FileText } from 'lucide-react';
+import { Copy, Download, Eye, Code, Database, FileText } from 'lucide-react';
 import { useProject } from '../contexts/ProjectContext';
 import { LivePreview } from './LivePreview';
 import { generateComponentSchema, generateTypeDefinitions } from '../services/schemaGenerator';
@@ -15,7 +15,7 @@ export const CodeEditor = () => {
   const tabs = [
     { id: 'component', label: 'Component', icon: Code },
     { id: 'preview', label: 'Live Preview', icon: Eye },
-    { id: 'schema', label: 'Schema', icon: Schema },
+    { id: 'schema', label: 'Schema', icon: Database },
     { id: 'types', label: 'Types', icon: FileText },
   ];
 
