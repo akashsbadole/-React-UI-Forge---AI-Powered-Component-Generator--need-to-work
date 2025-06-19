@@ -1,28 +1,38 @@
 
 import React from 'react';
-import { Layout } from '../components/Layout';
-import { ComponentGenerator } from '../components/ComponentGenerator';
+import { EnhancedLayout } from '../components/EnhancedLayout';
+import { ChatInterface } from '../components/ChatInterface';
 import { CodeEditor } from '../components/CodeEditor';
 import { ComponentLibrary } from '../components/ComponentLibrary';
+import { ComponentGenerator } from '../components/ComponentGenerator';
 import { ProjectProvider } from '../contexts/ProjectContext';
 
 const Index = () => {
   return (
     <ProjectProvider>
-      <Layout>
+      <EnhancedLayout>
         <div className="h-full grid grid-cols-12 gap-4 p-4">
-          {/* Left Panel - Generator & Library */}
-          <div className="col-span-3 space-y-4">
-            <ComponentGenerator />
-            <ComponentLibrary />
+          {/* Left Panel - Chat & Generator */}
+          <div className="col-span-4 space-y-4">
+            <div className="h-2/3">
+              <ChatInterface />
+            </div>
+            <div className="h-1/3">
+              <ComponentGenerator />
+            </div>
           </div>
           
-          {/* Right Panel - Code Editor & Preview */}
-          <div className="col-span-9">
+          {/* Center Panel - Code Editor */}
+          <div className="col-span-5">
             <CodeEditor />
           </div>
+          
+          {/* Right Panel - Component Library */}
+          <div className="col-span-3">
+            <ComponentLibrary />
+          </div>
         </div>
-      </Layout>
+      </EnhancedLayout>
     </ProjectProvider>
   );
 };
