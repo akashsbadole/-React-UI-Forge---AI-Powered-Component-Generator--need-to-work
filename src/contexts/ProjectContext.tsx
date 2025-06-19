@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface GeneratedComponent {
@@ -21,6 +20,7 @@ interface ProjectContextType {
   state: ProjectState;
   addComponent: (component: GeneratedComponent) => void;
   setActiveComponent: (component: GeneratedComponent | null) => void;
+  updateComponentCode: (componentId: string, newCode: string) => void;
   setIsGenerating: (loading: boolean) => void;
   setAiProvider: (provider: 'openai' | 'claude' | 'perplexity') => void;
   setApiKey: (key: string) => void;
@@ -48,6 +48,23 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
 
   const setActiveComponent = (component: GeneratedComponent | null) => {
     setState(prev => ({ ...prev, activeComponent: component }));
+  };
+
+  const updateComponentCode = (componentId: string, newCode: string) => {
+    setState(prev => {
+      const updatedComponents = prev.components.map(comp =>
+        comp.id === componentId ? { ...comp, code: newCode } : comp
+      );
+      const updatedActiveComponent = prev.activeComponent?.id === componentId
+        ? { ...prev.activeComponent, code: newCode }
+        : prev.activeComponent;
+      
+      return {
+        ...prev,
+        components: updatedComponents,
+        activeComponent: updatedActiveComponent,
+      };
+    });
   };
 
   const setIsGenerating = (isGenerating: boolean) => {
@@ -120,6 +137,7 @@ root.render(<App />);
       state,
       addComponent,
       setActiveComponent,
+      updateComponentCode,
       setIsGenerating,
       setAiProvider,
       setApiKey,
